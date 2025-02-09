@@ -1,0 +1,61 @@
+version: "3.8"
+
+networks:
+  nwtis:
+    name: nwtis
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 20.24.5.0/24
+
+services:
+  hsqldb:
+    build:
+      context: .
+      dockerfile: Dockerfile.hsql
+    container_name: nwtis_hsql_dz_2c
+    networks:
+      nwtis:
+        ipv4_address: 20.24.5.3
+    volumes:
+      - nwtis_hsql_dz_2v:/opt/data
+
+  h2:
+    build:
+      context: .
+      dockerfile: Dockerfile.h2
+    container_name: nwtis_h2_dz_2c
+    networks:
+      nwtis:
+        ipv4_address: 20.24.5.4
+    volumes:
+      - nwtis_h2_dz_2v:/opt/database
+
+  app:
+    build:
+      context: ./dskrlac20_vjezba_07_dz_2_app
+    container_name: nwtis_app_dz_2c
+    networks:
+      nwtis:
+        ipv4_address: 20.24.5.2
+    depends_on:
+      - servisi
+
+  servisi:
+    build:
+      context: ./dskrlac20_vjezba_07_dz_2_servisi
+    container_name: nwtis_servisi_dz_2c
+    ports:
+      - "9080:8080"
+    networks:
+      nwtis:
+        ipv4_address: 20.24.5.5
+    depends_on:
+      - hsqldb
+      - h2
+
+volumes:
+  nwtis_hsql_dz_2v:
+    external: true
+  nwtis_h2_dz_2v:
+    external: true

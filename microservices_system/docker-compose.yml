@@ -1,0 +1,41 @@
+version: "3.8"
+
+networks:
+  nwtis:
+    external: true
+
+services:
+  h2:
+    build:
+      context: .
+      dockerfile: Dockerfile.h2
+    container_name: nwtis_h2_dz_3c
+    networks:
+      nwtis:
+        ipv4_address: 20.24.5.4
+    volumes:
+      - h2nwtis:/opt/database
+
+  app:
+    build:
+      context: ./dskrlac20_vjezba_08_dz_3_app
+    container_name: nwtis_app_dz_3c
+    networks:
+      nwtis:
+        ipv4_address: 20.24.5.2
+    depends_on:
+      - mikroservisi
+
+  mikroservisi:
+    build:
+      context: ./dskrlac20_vjezba_08_dz_3_mikroservisi
+    container_name: nwtis_mikroservisi_dz_3c
+    networks:
+      nwtis:
+        ipv4_address: 20.24.5.5
+    depends_on:
+      - h2
+
+volumes:
+  h2nwtis:
+    external: true

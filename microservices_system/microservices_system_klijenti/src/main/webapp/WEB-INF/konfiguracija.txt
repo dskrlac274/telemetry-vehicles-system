@@ -1,0 +1,10 @@
+#ako se koristi dskrlac20_vjezba_08_dz_3_mikroservisi
+webservis.kazne.baseuri=http://20.24.5.5:7070/
+webservis.radari.baseuri=http://20.24.5.5:7070/
+webservis.vozila.baseuri=http://20.24.5.5:7070/
+webservis.simulacije.baseuri=http://20.24.5.5:7070/
+#ako se koristi dskrlac20_vjezba_08_dz_3_servisi
+#webservis.kazne.baseuri=http://20.24.5.1:8080/dskrlac20_vjezba_08_dz_3_servisi/
+#webservis.radari.baseuri=http://20.24.5.1:8080/dskrlac20_vjezba_08_dz_3_servisi/
+#webservis.vozila.baseuri=http://20.24.5.1:8080/dskrlac20_vjezba_08_dz_3_servisi/
+#webservis.simulacije.baseuri=http://20.24.5.1:8080/dskrlac20_vjezba_08_dz_3_servisi/
